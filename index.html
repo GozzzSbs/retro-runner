@@ -444,89 +444,134 @@
         /* =========================
            FAVORIS
         ========================= */
+/* =========================
+   FAVORIS PERSISTANTS
+========================= */
 
-        function toggleFavorite(button) {
+const FAVORITES_KEY = "retroRunnerFavorites";
 
-            button.classList.toggle("active");
+let favorites = JSON.parse(
+    localStorage.getItem(FAVORITES_KEY) || "[]"
+);
 
-            if (button.classList.contains("active")) {
 
-                button.textContent = "★";
+/* Enregistrer les favoris */
+
+function saveFavorites() {
+
+    localStorage.setItem(
+        FAVORITES_KEY,
+        JSON.stringify(favorites)
+    );
+}
+
+
+/* Modifier un favori */
+
+function toggleFavorite(button) {
+
+    const card = button.closest(".card");
+
+    const year = card.dataset.year;
+
+    if (favorites.includes(year)) {
+
+        favorites = favorites.filter(
+            item => item !== year
+        );
+
+        button.textContent = "☆";
+        button.classList.remove("active");
+
+    } else {
+
+        favorites.push(year);
+
+        button.textContent = "★";
+        button.classList.add("active");
+    }
+
+    saveFavorites();
+}
+
+
+/* Restaurer les favoris au chargement */
+
+document.querySelectorAll(".card").forEach(
+    function(card) {
+
+        const year = card.dataset.year;
+
+        const button =
+            card.querySelector(".favorite");
+
+        if (favorites.includes(year)) {
+
+            button.textContent = "★";
+            button.classList.add("active");
+        }
+    }
+);
+
+
+/* =========================
+   RECHERCHE
+========================= */
+
+const search =
+    document.getElementById("search");
+
+const cards =
+    document.querySelectorAll(".card");
+
+const count =
+    document.getElementById("count");
+
+
+search.addEventListener(
+    "input",
+    function() {
+
+        const query =
+            search.value
+                .toLowerCase()
+                .trim();
+
+        let visible = 0;
+
+        cards.forEach(function(card) {
+
+            const year =
+                card.dataset.year;
+
+            const title =
+                card
+                    .querySelector("h3")
+                    .textContent
+                    .toLowerCase();
+
+
+            if (
+                title.includes(query) ||
+                year.includes(query)
+            ) {
+
+                card.style.display = "";
+                visible++;
 
             } else {
 
-                button.textContent = "☆";
-
+                card.style.display = "none";
             }
-        }
+
+        });
 
 
-        /* =========================
-           RECHERCHE
-        ========================= */
-
-        const search =
-            document.getElementById("search");
-
-        const cards =
-            document.querySelectorAll(".card");
-
-        const count =
-            document.getElementById("count");
-
-
-        search.addEventListener(
-            "input",
-            function () {
-
-                const query =
-                    search.value
-                        .toLowerCase()
-                        .trim();
-
-                let visible = 0;
-
-
-                cards.forEach(function (card) {
-
-                    const year =
-                        card.dataset.year;
-
-                    const title =
-                        card
-                            .querySelector("h3")
-                            .textContent
-                            .toLowerCase();
-
-
-                    if (
-                        title.includes(query) ||
-                        year.includes(query)
-                    ) {
-
-                        card.style.display = "";
-
-                        visible++;
-
-                    } else {
-
-                        card.style.display = "none";
-
-                    }
-
-                });
-
-
-                count.textContent =
-                    visible +
-                    (visible > 1
-                        ? " versions"
-                        : " version");
-
-            }
-        );
-
-    </script>
-
-</body>
-</html>
+        count.textContent =
+            visible +
+            (visible > 1
+                ? " versions"
+                : " version");
+    }
+);
+        
