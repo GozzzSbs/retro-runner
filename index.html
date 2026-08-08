@@ -4,12 +4,168 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Retro Runner</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #0b0b0f;
+            color: white;
+        }
+
+        header {
+            padding: 25px 7%;
+            background: #15151c;
+            border-bottom: 1px solid #292933;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 70px 20px 45px;
+        }
+
+        .hero h1 {
+            font-size: 50px;
+            margin: 0 0 15px;
+        }
+
+        .hero p {
+            color: #aaa;
+            font-size: 18px;
+        }
+
+        .games {
+            max-width: 1100px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        .games h2 {
+            margin-bottom: 25px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: #17171f;
+            border: 1px solid #292933;
+            border-radius: 15px;
+            padding: 25px;
+            transition: 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: #555;
+        }
+
+        .game-image {
+            height: 130px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #25253a, #111118);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 45px;
+            margin-bottom: 20px;
+        }
+
+        .card h3 {
+            margin: 0 0 8px;
+        }
+
+        .card p {
+            color: #999;
+        }
+
+        .play {
+            width: 100%;
+            padding: 12px;
+            border: 0;
+            border-radius: 8px;
+            background: white;
+            color: black;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .play:hover {
+            background: #ddd;
+        }
+
+        footer {
+            text-align: center;
+            color: #666;
+            padding: 50px 20px;
+        }
+    </style>
 </head>
 
 <body>
-    <h1>🎮 Retro Runner</h1>
-    <p>Bienvenue sur mon site de jeux rétro !</p>
 
-    <button>▶ Jouer</button>
+<header>
+    <div class="logo">🎮 Retro Runner</div>
+    <div>Accueil</div>
+</header>
+
+<section class="hero">
+    <h1>Retro Runner</h1>
+    <p>Retrouve tes jeux rétro directement dans ton navigateur.</p>
+</section>
+
+<section class="games">
+
+    <h2>🎮 Versions disponibles</h2>
+
+    <div class="grid">
+
+        <div class="card">
+            <div class="game-image">🏃</div>
+
+            <h3>Version 2014</h3>
+
+            <p>Une ancienne version du jeu.</p>
+
+            <button class="play">
+                ▶ Jouer
+            </button>
+        </div>
+
+        <div class="card">
+            <div class="game-image">🏃</div>
+
+            <h3>Version 2015</h3>
+
+            <p>Une autre version rétro.</p>
+
+            <button class="play">
+                ▶ Jouer
+            </button>
+        </div>
+
+    </div>
+
+</section>
+
+<footer>
+    Retro Runner © 2026
+</footer>
+
 </body>
 </html>
