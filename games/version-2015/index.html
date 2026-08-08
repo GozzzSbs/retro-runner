@@ -3,11 +3,419 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Retro Runner - 2015</title>
+
+    <title>Retro Runner - Version 2015</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            margin: 0;
+            width: 100%;
+            min-height: 100%;
+            background: #08080c;
+            color: white;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+        }
+
+        /* BARRE DU HAUT */
+
+        .topbar {
+            height: 64px;
+            padding: 0 24px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            background: #15151c;
+            border-bottom: 1px solid #292933;
+        }
+
+        .left {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .back {
+            color: white;
+            text-decoration: none;
+            padding: 9px 14px;
+
+            background: #24242d;
+            border-radius: 8px;
+
+            font-weight: bold;
+        }
+
+        .back:hover {
+            background: #33333e;
+        }
+
+        .title {
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .version {
+            color: #999;
+            font-size: 14px;
+        }
+
+        /* CONTENU */
+
+        .page {
+            width: 100%;
+            max-width: 1400px;
+            margin: auto;
+            padding: 24px;
+        }
+
+        .game-header {
+            margin-bottom: 18px;
+        }
+
+        .game-header h1 {
+            margin: 0 0 7px;
+            font-size: 28px;
+        }
+
+        .game-header p {
+            margin: 0;
+            color: #888;
+        }
+
+        /* ZONE DU JEU */
+
+        .game-wrapper {
+            width: 100%;
+            background: #000;
+            border: 1px solid #292933;
+            border-radius: 14px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .game-screen {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+
+            min-height: 400px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: #050505;
+            position: relative;
+        }
+
+        /* ÉCRAN DE CHARGEMENT */
+
+        .loading {
+            text-align: center;
+        }
+
+        .loading-icon {
+            font-size: 55px;
+            margin-bottom: 15px;
+        }
+
+        .loading h2 {
+            margin: 0 0 8px;
+        }
+
+        .loading p {
+            color: #888;
+            margin: 0;
+        }
+
+        /* CONTENEUR UNITY */
+
+        #unity-container {
+            width: 100%;
+            height: 100%;
+            display: none;
+        }
+
+        #unity-canvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+            background: #000;
+        }
+
+        /* BARRE DU BAS */
+
+        .controls {
+            min-height: 64px;
+            padding: 12px 16px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+
+            background: #15151c;
+            border-top: 1px solid #292933;
+        }
+
+        .controls-left {
+            color: #888;
+            font-size: 14px;
+        }
+
+        .fullscreen {
+            border: 0;
+            border-radius: 8px;
+
+            padding: 11px 16px;
+
+            background: white;
+            color: black;
+
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .fullscreen:hover {
+            background: #ddd;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 700px) {
+
+            .topbar {
+                padding: 0 14px;
+            }
+
+            .title {
+                display: none;
+            }
+
+            .page {
+                padding: 12px;
+            }
+
+            .game-header h1 {
+                font-size: 23px;
+            }
+
+            .game-screen {
+                min-height: 300px;
+                aspect-ratio: 16 / 10;
+            }
+
+            .controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .fullscreen {
+                width: 100%;
+            }
+        }
+    </style>
 </head>
 
 <body>
-    <h1>Version 2015</h1>
-    <p>Le jeu sera chargé ici.</p>
+
+    <!-- BARRE DU HAUT -->
+
+    <header class="topbar">
+
+        <div class="left">
+
+            <a
+                class="back"
+                href="../../index.html"
+            >
+                ← Retour
+            </a>
+
+            <div class="title">
+                Retro Runner
+            </div>
+
+        </div>
+
+        <div class="version">
+            Version 2015
+        </div>
+
+    </header>
+
+
+    <!-- PAGE -->
+
+    <main class="page">
+
+        <div class="game-header">
+
+            <h1>Version 2015</h1>
+
+            <p>
+                Jeu rétro directement dans ton navigateur.
+            </p>
+
+        </div>
+
+
+        <!-- ZONE DU JEU -->
+
+        <section
+            class="game-wrapper"
+            id="game-wrapper"
+        >
+
+            <div
+                class="game-screen"
+                id="game-screen"
+            >
+
+                <!-- ÉCRAN DE CHARGEMENT -->
+
+                <div
+                    class="loading"
+                    id="loading"
+                >
+
+                    <div class="loading-icon">
+                        🎮
+                    </div>
+
+                    <h2>Prêt à jouer</h2>
+
+                    <p>
+                        La build WebGL sera chargée ici.
+                    </p>
+
+                </div>
+
+
+                <!-- CONTENEUR UNITY -->
+
+                <div id="unity-container">
+
+                    <canvas
+                        id="unity-canvas"
+                    ></canvas>
+
+                </div>
+
+            </div>
+
+
+            <!-- CONTROLES -->
+
+            <div class="controls">
+
+                <div class="controls-left">
+                    Retro Runner • Version 2015
+                </div>
+
+                <button
+                    class="fullscreen"
+                    id="fullscreen-button"
+                >
+                    ⛶ Plein écran
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script>
+
+        /*
+         * =====================================================
+         * LECTEUR UNITY WEBGL
+         * =====================================================
+         *
+         * La build WebGL sera ajoutée ultérieurement.
+         *
+         * Les fichiers pourront être placés dans :
+         *
+         * games/version-2015/Build/
+         *
+         */
+
+        const loading =
+            document.getElementById("loading");
+
+        const unityContainer =
+            document.getElementById("unity-container");
+
+        const gameWrapper =
+            document.getElementById("game-wrapper");
+
+        const fullscreenButton =
+            document.getElementById("fullscreen-button");
+
+
+        /*
+         * PLEIN ÉCRAN
+         */
+
+        fullscreenButton.addEventListener(
+            "click",
+            function () {
+
+                if (!document.fullscreenElement) {
+
+                    gameWrapper
+                        .requestFullscreen()
+                        .catch(function (error) {
+
+                            console.log(
+                                "Impossible d'activer le plein écran :",
+                                error
+                            );
+
+                        });
+
+                } else {
+
+                    document.exitFullscreen();
+
+                }
+
+            }
+        );
+
+
+        /*
+         * FONCTION QUI POURRA DÉMARRER
+         * LA BUILD UNITY PLUS TARD.
+         */
+
+        function startGame() {
+
+            loading.style.display = "none";
+
+            unityContainer.style.display = "block";
+
+            /*
+             * Le chargement Unity sera ajouté
+             * lorsque nous aurons une build WebGL
+             * autorisée à héberger.
+             */
+
+        }
+
+    </script>
+
 </body>
 </html>
