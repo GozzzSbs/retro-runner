@@ -1,53 +1,26 @@
 window.PokiSDK = {
-    init: function() {
-        return Promise.resolve();
-    },
+init:()=>Promise.resolve(),
+gameLoadingStart:()=>Promise.resolve(),
+gameLoadingProgress:()=>Promise.resolve(),
+gameLoadingFinished:()=>Promise.resolve(),
 
-    gameLoadingStart: function() {
-        return Promise.resolve();
-    },
+gameplayStart:()=>Promise.resolve(),
+gameplayStop:()=>Promise.resolve(),
 
-    gameLoadingProgress: function() {
-        return Promise.resolve();
-    },
+commercialBreak:()=>Promise.resolve(),
+rewardedBreak:()=>Promise.resolve(true),
 
-    gameLoadingFinished: function() {
-        return Promise.resolve();
-    },
+togglePlayerAdvertisingConsent:()=>Promise.resolve(),
+setPlayerAge:()=>Promise.resolve(),
 
-    gameplayStart: function() {
-        return Promise.resolve();
-    },
+displayAd:()=>Promise.resolve(),
+destroyAd:()=>Promise.resolve(),
 
-    gameplayStop: function() {
-        return Promise.resolve();
-    },
+isAdBlocked:()=>false,
 
-    commercialBreak: function() {
-        return Promise.resolve();
-    },
+getLeaderboard:()=>Promise.resolve([]),
+shareable:()=>Promise.resolve(false),
 
-    rewardedBreak: function() {
-        return Promise.resolve(true);
-    },
-
-    togglePlayerAdvertisingConsent: function() {
-        return Promise.resolve();
-    },
-
-    setPlayerAge: function() {
-        return Promise.resolve();
-    },
-
-    setDebug: function() {},
-
-    customEvent: function() {},
-
-    displayAd: function() {
-        return Promise.resolve();
-    },
-
-    shareable: function() {
-        return Promise.resolve(false);
-    }
+setDebug:()=>{},
+customEvent:()=>{}
 };
