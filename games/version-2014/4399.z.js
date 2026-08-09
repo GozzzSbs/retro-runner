@@ -2123,15 +2123,12 @@ var my4399UnityModule = (function() {
         };
 
         function _JS_FileSystem_Initialize() {
-            if (!Module.indexedDB) return;
-            Module.setInterval((function() {
-                fs.sync(true)
-            }), fs.syncInternal)
-        }
+    return;
+}
 
-        function _JS_FileSystem_Sync() {
-            if (!Module.indexedDB) return;
-            fs.sync(false)
+function _JS_FileSystem_Sync() {
+    return;
+}
         }
 
         function _JS_Log_Dump(ptr, type) {
