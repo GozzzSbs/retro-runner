@@ -598,13 +598,11 @@ window.PokiSDK = {
         n.setAttribute("id", "spinner"), n.className = "spinner", document.body.appendChild(n)
     }(), window.onload = function() {
         i();
-        try {
-            Object(v.a)().then(function() {
-                l()
-            })
-        } catch (n) {
-            console.info("Slideshow loading error", n), l()
-        }
+try {
+    l()
+} catch (n) {
+    console.info("Slideshow disabled", n)
+}
         c()
     }
 }, function(n, e, t) {
