@@ -2127,9 +2127,8 @@ var my4399UnityModule = (function() {
 }
 
         function _JS_FileSystem_Sync() {
-            if (!Module.indexedDB) return;
-            fs.sync(false)
-        }
+    return;
+}
 
         function _JS_Log_Dump(ptr, type) {
             var str = Pointer_stringify(ptr);
