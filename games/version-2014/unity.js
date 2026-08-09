@@ -543,7 +543,7 @@ window.PokiSDK = {
     rewardedBreak: function() {
         return Promise.resolve(true);
     },
-    setDebug: function() {}
+    setDebug: function() {},
         customEvent: function() {}
 };
     function i() {
