@@ -1772,7 +1772,9 @@ var UnityLoader = UnityLoader || {
         handler: function(e, t) {
             var r = t ? this.demangle(e, t) : e.message;
             if (!(t && t.errorhandler && t.errorhandler(r, e.filename, e.lineno) || (console.log("Invoking error handler due to\n" + r), "function" == typeof dump && dump("Invoking error handler due to\n" + r), -1 != r.indexOf("UnknownError") || -1 != r.indexOf("Program terminated with exit(0)") || this.didShowErrorMessage))) {
-                parent.showUnitywebNoSupport();
+                if (parent.showUnitywebNoSupport) {
+    parent.showUnitywebNoSupport();
+}
             }
         },
         popup: function(e, t, r) {
