@@ -548,6 +548,9 @@ window.PokiSDK = {
     setPlayerAge: function() {
     return Promise.resolve();
 },
+    togglePlayerAdvertisingConsent: function() {
+    return Promise.resolve();
+}
 };
     function i() {
         d = document.getElementById("game-container"), u = document.getElementById("loader"), f = document.getElementById("progress-container"), h = document.getElementById("progress-fill"), m = document.getElementById("progress-amount"), p = document.getElementById("progress-comment"), window.addEventListener("resize", o), window.addEventListener("focus", o), window.pokiReady = !0
