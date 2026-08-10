@@ -270,6 +270,48 @@
                 height: 150px;
             }
         }
+        /* ECROU SETTINGS */
+
+.settings-btn {
+    width: 45px;
+    height: 45px;
+    border: 1px solid #33333e;
+    border-radius: 9px;
+    background: #20202a;
+    color: white;
+    cursor: pointer;
+    font-size: 22px;
+}
+
+.settings-btn:hover {
+    background: #33333e;
+}
+
+
+.settings-panel {
+    display: none;
+    position: fixed;
+    top: 80px;
+    right: 30px;
+    width: 260px;
+    padding: 20px;
+    background: #15151c;
+    border: 1px solid #33333e;
+    border-radius: 15px;
+    z-index: 999;
+}
+
+
+.unlock-btn {
+    width: 100%;
+    padding: 12px;
+    border-radius: 9px;
+    border: none;
+    background: white;
+    color: black;
+    font-weight: bold;
+    cursor: pointer;
+}
     </style>
 </head>
 
@@ -281,18 +323,43 @@
 
     <header>
 
-        <div class="logo">
-            🎮 Retro <span>Runner</span>
-        </div>
+    <div class="logo">
+        🎮 Retro <span>Runner</span>
+    </div>
+
+
+    <div style="display:flex;gap:10px;align-items:center;">
 
         <input
-            id="search"
-            class="search"
-            type="search"
-            placeholder="🔎 Rechercher une version..."
+        id="search"
+        class="search"
+        type="search"
+        placeholder="🔎 Rechercher une version..."
         >
 
-    </header>
+        <button class="settings-btn" onclick="openSettings()">
+            ⚙️
+        </button>
+
+    </div>
+
+</header>
+    <div class="settings-panel" id="settingsPanel">
+
+    <h3>⚙️ Paramètres</h3>
+
+    <p>
+        Unlock All :
+        <span id="unlockStatus">
+            Désactivé
+        </span>
+    </p>
+
+    <button class="unlock-btn" onclick="unlockAll()">
+        🔓 Unlock All
+    </button>
+
+</div>
 
 
     <!-- =========================
@@ -574,4 +641,55 @@ search.addEventListener(
                 : " version");
     }
 );
-        
+ /* =========================
+   ECROU SETTINGS
+========================= */
+
+function openSettings() {
+
+    const panel =
+        document.getElementById("settingsPanel");
+
+    if (panel.style.display === "block") {
+
+        panel.style.display = "none";
+
+    } else {
+
+        panel.style.display = "block";
+
+    }
+
+}
+
+
+function unlockAll() {
+
+    localStorage.setItem(
+        "unlockAll",
+        "true"
+    );
+
+    document.getElementById(
+        "unlockStatus"
+    ).textContent = "Activé ✅";
+
+    alert("Unlock All activé !");
+}
+
+
+/* Restaurer l'état */
+
+if (
+    localStorage.getItem("unlockAll") === "true"
+) {
+
+    document.getElementById(
+        "unlockStatus"
+    ).textContent = "Activé ✅";
+
+}       
+</script>
+
+</body>
+</html>
