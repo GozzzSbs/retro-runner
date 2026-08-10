@@ -45,7 +45,27 @@ customEvent:()=>{}
 
 
 <script src="4399.z.js"></script>
+<script>
+window.PokiSDK = window.PokiSDK || {};
 
+window.PokiSDK.gameplayStart = function() {
+    return Promise.resolve();
+};
+
+window.PokiSDK.gameplayStop = function() {
+    return Promise.resolve();
+};
+
+window.PokiSDK.customEvent = function() {};
+
+window.PokiSDK.commercialBreak = function() {
+    return Promise.resolve();
+};
+
+window.PokiSDK.rewardedBreak = function() {
+    return Promise.resolve(true);
+};
+</script>
 </head>
 
 <body>
