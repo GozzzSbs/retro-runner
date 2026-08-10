@@ -92,6 +92,10 @@ window.PokiSDK = {
     setDebug: function() {},
 
     customEvent: function() {}
+    roundStart:()=>Promise.resolve(),
+    roundEnd:()=>Promise.resolve(),
+    levelStart:()=>Promise.resolve(),
+    levelEnd:()=>Promise.resolve(),
 };
 
 console.log("PokiSDK chargé", window.PokiSDK);
