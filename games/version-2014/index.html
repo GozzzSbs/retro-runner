@@ -5,8 +5,9 @@
 <title>Subway Surfers: San Francisco</title>
 
 <script>
-  window.showUnitywebNoSupport = function() {};
+window.showUnitywebNoSupport = function() {};
 window.parent.showUnitywebNoSupport = window.showUnitywebNoSupport;
+
 window.config = {
   loader: "unity",
   debug: false,
@@ -16,59 +17,92 @@ window.config = {
   unityWebglBuildUrl: "Build/SanFrancisco/SanFrancisco.json",
   numScreenshots: 0,
   companyName: "GozzzSbs",
-productName: "Subway Surfers",
+  productName: "Subway Surfers"
 };
 </script>
 
 
+<!-- Chargement du script Unity/Poki original -->
+<script src="4399.z.js"></script>
+
+
+<!-- Faux PokiSDK pour éviter les erreurs -->
 <script>
 window.PokiSDK = {
-init:()=>Promise.resolve(),
-gameLoadingStart:()=>Promise.resolve(),
-gameLoadingProgress:()=>Promise.resolve(),
-gameLoadingFinished:()=>Promise.resolve(),
-gameplayStart:()=>Promise.resolve(),
-gameplayStop:()=>Promise.resolve(),
-commercialBreak:()=>Promise.resolve(),
-rewardedBreak:()=>Promise.resolve(true),
-togglePlayerAdvertisingConsent:()=>Promise.resolve(),
-setPlayerAge:()=>Promise.resolve(),
-displayAd:()=>Promise.resolve(),
-destroyAd:()=>Promise.resolve(),
-isAdBlocked:()=>false,
-getLeaderboard:()=>Promise.resolve([]),
-shareable:()=>Promise.resolve(false),
-setDebug:()=>{},
-customEvent:()=>{}
+    init: function() {
+        return Promise.resolve();
+    },
+
+    gameLoadingStart: function() {
+        return Promise.resolve();
+    },
+
+    gameLoadingProgress: function() {
+        return Promise.resolve();
+    },
+
+    gameLoadingFinished: function() {
+        return Promise.resolve();
+    },
+
+    gameplayStart: function() {
+        return Promise.resolve();
+    },
+
+    gameplayStop: function() {
+        return Promise.resolve();
+    },
+
+    commercialBreak: function() {
+        return Promise.resolve();
+    },
+
+    rewardedBreak: function() {
+        return Promise.resolve(true);
+    },
+
+    togglePlayerAdvertisingConsent: function() {
+        return Promise.resolve();
+    },
+
+    setPlayerAge: function() {
+        return Promise.resolve();
+    },
+
+    displayAd: function() {
+        return Promise.resolve();
+    },
+
+    destroyAd: function() {
+        return Promise.resolve();
+    },
+
+    isAdBlocked: function() {
+        return false;
+    },
+
+    getLeaderboard: function() {
+        return Promise.resolve([]);
+    },
+
+    shareable: function() {
+        return Promise.resolve(false);
+    },
+
+    setDebug: function() {},
+
+    customEvent: function() {}
 };
+
+console.log("PokiSDK chargé", window.PokiSDK);
 </script>
 
 
-<script src="4399.z.js"></script>
-<script>
-window.PokiSDK = window.PokiSDK || {};
-
-window.PokiSDK.gameplayStart = function() {
-    return Promise.resolve();
-};
-
-window.PokiSDK.gameplayStop = function() {
-    return Promise.resolve();
-};
-
-window.PokiSDK.customEvent = function() {};
-
-window.PokiSDK.commercialBreak = function() {
-    return Promise.resolve();
-};
-
-window.PokiSDK.rewardedBreak = function() {
-    return Promise.resolve(true);
-};
-</script>
 </head>
 
 <body>
+
 <script src="unity.js"></script>
+
 </body>
 </html>
