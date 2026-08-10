@@ -2239,9 +2239,12 @@ var my4399UnityModule = (function() {
             PokiSDK.roundEnd(Pointer_stringify(identifier))
         }
 
-        function _JS_PokiSDK_roundStart(identifier) {
-            PokiSDK.roundStart(Pointer_stringify(identifier))
-        }
+       function _JS_PokiSDK_roundStart(identifier) {
+    if (PokiSDK && typeof PokiSDK.roundStart === "function") {
+        return PokiSDK.roundStart(Pointer_stringify(identifier));
+    }
+    return Promise.resolve();
+}
 
         function _JS_PokiSDK_setPlayerAge(age) {
             PokiSDK.setPlayerAge(Pointer_stringify(age))
