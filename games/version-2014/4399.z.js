@@ -2217,8 +2217,11 @@ var my4399UnityModule = (function() {
     return Promise.resolve();
 }
         function _JS_PokiSDK_gameplayStop() {
-            PokiSDK.gameplayStop()
-        }
+    if (PokiSDK && typeof PokiSDK.gameplayStop === "function") {
+        return PokiSDK.gameplayStop();
+    }
+    return Promise.resolve();
+}
 
         function _JS_PokiSDK_happyTime(intensity) {
             PokiSDK.happyTime(Pointer_stringify(intensity))
