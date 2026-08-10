@@ -2236,8 +2236,11 @@ var my4399UnityModule = (function() {
         }
 
         function _JS_PokiSDK_roundEnd(identifier) {
-            PokiSDK.roundEnd(Pointer_stringify(identifier))
-        }
+    if (PokiSDK && typeof PokiSDK.roundEnd === "function") {
+        return PokiSDK.roundEnd(Pointer_stringify(identifier));
+    }
+    return Promise.resolve();
+}
 
        function _JS_PokiSDK_roundStart(identifier) {
     if (PokiSDK && typeof PokiSDK.roundStart === "function") {
