@@ -2224,8 +2224,11 @@ var my4399UnityModule = (function() {
 }
 
         function _JS_PokiSDK_happyTime(intensity) {
-            PokiSDK.happyTime(Pointer_stringify(intensity))
-        }
+    if (PokiSDK && typeof PokiSDK.happyTime === "function") {
+        return PokiSDK.happyTime(Pointer_stringify(intensity));
+    }
+    return Promise.resolve();
+}
 
         function _JS_PokiSDK_initPokiBridge(name) {
             window.initPokiBridge(Pointer_stringify(name))
