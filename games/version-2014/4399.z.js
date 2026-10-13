@@ -2127,7 +2127,18 @@ var my4399UnityModule = (function() {
 }
 
         function _JS_FileSystem_Sync() {
-    return;
+    if (typeof FS === "undefined" || typeof FS.syncfs !== "function") {
+        console.error("Sauvegarde impossible : FS.syncfs indisponible");
+        return;
+    }
+
+    FS.syncfs(false, function (err) {
+        if (err) {
+            console.error("Erreur de sauvegarde IndexedDB :", err);
+        } else {
+            console.log("Synchronisation IndexedDB terminée");
+        }
+    });
 }
 
         function _JS_Log_Dump(ptr, type) {
