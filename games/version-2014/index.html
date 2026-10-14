@@ -397,7 +397,21 @@ document.getElementById("modalBackdrop").addEventListener("click", event => {
   if (event.target.id === "modalBackdrop") closeModal();
 });
 </script>
+<script>
+(function () {
+  const originalSetItem = Storage.prototype.setItem;
 
+  Storage.prototype.setItem = function (key, value) {
+    return originalSetItem.call(this, key, value);
+  };
+
+  window.addEventListener("beforeunload", function () {
+    try {
+      localStorage.setItem("subwayranked-visited", "1");
+    } catch (e) {}
+  });
+})();
+</script>
 <script src="unity.js"></script>
 </body>
 </html>
