@@ -1,8 +1,246 @@
+
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
-<meta charset="utf-8">
-<title>Subway Surfers: San Francisco</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SubwayRanked</title>
+
+<style>
+:root {
+  --cyan: #5cecff;
+  --blue: #1687ff;
+  --panel: rgba(15, 24, 47, .96);
+  --muted: #a9b9d8;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: white;
+  font-family: Inter, Arial, sans-serif;
+  background:
+    radial-gradient(ellipse at 50% 35%, #68c7dc 0%, #278ebc 42%, #102444 100%);
+}
+
+.site-header {
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 0 24px;
+  background: rgba(9, 17, 37, .94);
+  border-bottom: 1px solid rgba(255,255,255,.13);
+}
+
+.brand {
+  color: white;
+  font-size: 22px;
+  font-weight: 950;
+  letter-spacing: -.7px;
+}
+
+.brand span { color: var(--cyan); }
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+button {
+  cursor: pointer;
+  border: 0;
+  border-radius: 9px;
+  padding: 11px 16px;
+  color: white;
+  font-weight: 800;
+  background: #253653;
+  transition: transform .15s, filter .15s;
+}
+
+button:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.15);
+}
+
+button.primary {
+  color: #06172b;
+  background: linear-gradient(135deg, #8af7ff, #36baff);
+  box-shadow: 0 4px 18px #26c8ff38;
+}
+
+button.active { outline: 2px solid var(--cyan); }
+
+main {
+  width: min(1180px, 96%);
+  margin: 25px auto;
+}
+
+.hero {
+  text-align: center;
+  margin: 18px 0 22px;
+}
+
+.hero h1 {
+  margin: 0;
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 950;
+  text-shadow: 0 4px 0 #10213b;
+}
+
+.hero p {
+  margin: 9px 0;
+  color: #e4f5ff;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 310px;
+  gap: 18px;
+  align-items: start;
+}
+
+.game-frame {
+  position: relative;
+  min-height: 430px;
+  overflow: hidden;
+  border: 2px solid #8aeaff;
+  border-radius: 15px;
+  background: #10213b;
+  box-shadow: 0 18px 55px #07152d66;
+}
+
+/* Le jeu Unity est chargé par le script existant. */
+#game, canvas {
+  max-width: 100%;
+}
+
+.game-caption {
+  position: absolute;
+  left: 12px;
+  bottom: 12px;
+  z-index: 5;
+  padding: 8px 11px;
+  border-radius: 8px;
+  background: #09162ccc;
+  font-size: 12px;
+  pointer-events: none;
+}
+
+.side-panel {
+  padding: 19px;
+  border: 1px solid #ffffff20;
+  border-radius: 15px;
+  background: var(--panel);
+  box-shadow: 0 18px 55px #07152d66;
+}
+
+.side-panel h2 { margin: 0 0 7px; }
+
+.muted {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.rank-card {
+  margin: 17px 0;
+  padding: 15px;
+  text-align: center;
+  border: 1px solid #5cecff50;
+  border-radius: 12px;
+  background: linear-gradient(145deg, #172c4b, #101b34);
+}
+
+.rank-icon { font-size: 38px; }
+
+.rank-name {
+  margin-top: 6px;
+  color: var(--cyan);
+  font-size: 23px;
+  font-weight: 950;
+}
+
+.stat-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 11px 0;
+  border-bottom: 1px solid #ffffff12;
+  font-size: 14px;
+}
+
+.full { width: 100%; margin-top: 10px; }
+
+.bottom-nav {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin: 19px 0;
+}
+
+.notice {
+  margin-top: 12px;
+  padding: 11px;
+  border-radius: 9px;
+  color: #dceaff;
+  background: #ffffff0d;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: #050b18b8;
+  backdrop-filter: blur(7px);
+}
+
+.modal-backdrop.show { display: flex; }
+
+.modal {
+  width: min(430px, 100%);
+  padding: 24px;
+  text-align: center;
+  border: 1px solid #7aeaff75;
+  border-radius: 17px;
+  background: #111e38;
+  box-shadow: 0 20px 80px #0008;
+}
+
+.modal h2 { margin-top: 0; }
+
+.modal-buttons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-top: 18px;
+}
+
+#modalMessage {
+  color: var(--cyan);
+  min-height: 24px;
+  font-size: 14px;
+}
+
+@media (max-width: 800px) {
+  .site-header { padding: 0 12px; }
+  .brand { font-size: 18px; }
+  .nav button { padding: 9px; font-size: 12px; }
+  .layout { grid-template-columns: 1fr; }
+  .game-frame { min-height: 320px; }
+}
+</style>
 
 <script>
 window.showUnitywebNoSupport = function() {};
@@ -11,104 +249,155 @@ window.parent.showUnitywebNoSupport = window.showUnitywebNoSupport;
 window.config = {
   loader: "unity",
   debug: false,
-  title: "Subway Surfers: San Francisco",
+  title: "SubwayRanked",
   unityVersion: "2019.4.18f1",
   unityWebglLoaderUrl: "UnityLoader2019.2.js",
   unityWebglBuildUrl: "Build/SanFrancisco/SanFrancisco.json",
   numScreenshots: 0,
   companyName: "GozzzSbs",
-  productName: "Subway Surfers"
+  productName: "SubwayRanked"
 };
 </script>
-
-
-<!-- Chargement du script Unity/Poki original -->
-<script src="4399.z.js"></script>
-
-
-<!-- Faux PokiSDK pour éviter les erreurs -->
-<script>
-window.PokiSDK = {
-    init: function() {
-        return Promise.resolve();
-    },
-
-    gameLoadingStart: function() {
-        return Promise.resolve();
-    },
-
-    gameLoadingProgress: function() {
-        return Promise.resolve();
-    },
-
-    gameLoadingFinished: function() {
-        return Promise.resolve();
-    },
-
-    gameplayStart: function() {
-        return Promise.resolve();
-    },
-
-    gameplayStop: function() {
-        return Promise.resolve();
-    },
-
-    commercialBreak: function() {
-        return Promise.resolve();
-    },
-
-    rewardedBreak: function() {
-        return Promise.resolve(true);
-    },
-
-    togglePlayerAdvertisingConsent: function() {
-        return Promise.resolve();
-    },
-
-    setPlayerAge: function() {
-        return Promise.resolve();
-    },
-
-    displayAd: function() {
-        return Promise.resolve();
-    },
-
-    destroyAd: function() {
-        return Promise.resolve();
-    },
-
-    isAdBlocked: function() {
-        return false;
-    },
-
-    getLeaderboard: function() {
-        return Promise.resolve([]);
-    },
-
-    shareable: function() {
-        return Promise.resolve(false);
-    },
-
-    setDebug: function() {},
-
-    customEvent: function() {},
-    roundStart:()=>Promise.resolve(),
-    roundEnd:()=>Promise.resolve(),
-    levelStart:()=>Promise.resolve(),
-    levelEnd:()=>Promise.resolve(),
-    happyTime:()=>Promise.resolve()
-};
-
-console.log("PokiSDK chargé", window.PokiSDK);
-console.log("ROUND CHECK :", typeof window.PokiSDK.roundStart);
-</script>
-
-
 </head>
 
 <body>
+<header class="site-header">
+  <div class="brand">SUBWAY<span>RANKED</span></div>
+  <nav class="nav">
+    <button onclick="openModal('rank')">🏆 Ranked</button>
+    <button class="primary" onclick="openModal('duel')">⚔️ Duel 1v1</button>
+  </nav>
+</header>
+
+<main>
+  <section class="hero">
+    <h1>SUBWAY<span style="color:var(--cyan)">RANKED</span></h1>
+    <p>Run. Compete. Climb the ranks.</p>
+  </section>
+
+  <div class="layout">
+    <section>
+      <div class="game-frame">
+        <div class="game-caption">🎮 SUBWAY SURFERS · SAN FRANCISCO</div>
+        <div id="game"></div>
+      </div>
+
+      <div class="bottom-nav">
+        <button class="primary" onclick="openModal('duel')">⚔️ Find a Duel</button>
+        <button onclick="openModal('rank')">🏆 My Rank</button>
+        <button onclick="openModal('settings')">⚙️ Settings</button>
+      </div>
+    </section>
+
+    <aside class="side-panel">
+      <h2>🏆 Ranked Profile</h2>
+      <p class="muted">Your competitive dashboard</p>
+
+      <div class="rank-card">
+        <div class="rank-icon">🥉</div>
+        <div class="rank-name">Bronze III</div>
+        <div class="muted">Placement matches required</div>
+      </div>
+
+      <div class="stat-row"><span>Rating</span><strong>Unranked</strong></div>
+      <div class="stat-row"><span>Wins</span><strong>0</strong></div>
+      <div class="stat-row"><span>Losses</span><strong>0</strong></div>
+      <div class="stat-row"><span>Win rate</span><strong>—</strong></div>
+
+      <button class="primary full" onclick="openModal('duel')">FIND GAME</button>
+
+      <div class="notice">
+        <strong>1v1 Ranked</strong><br>
+        Challenge another player and compete for rank.
+        Online matchmaking requires a multiplayer server.
+      </div>
+    </aside>
+  </div>
+</main>
+
+<div id="modalBackdrop" class="modal-backdrop">
+  <section class="modal">
+    <h2 id="modalTitle">SubwayRanked</h2>
+    <p id="modalDescription" class="muted"></p>
+    <div id="modalMessage"></div>
+    <div class="modal-buttons">
+      <button class="primary" id="modalAction">Continue</button>
+      <button onclick="closeModal()">Close</button>
+    </div>
+  </section>
+</div>
+
+<script src="4399.z.js"></script>
+
+<script>
+window.PokiSDK = {
+  init: () => Promise.resolve(),
+  gameLoadingStart: () => Promise.resolve(),
+  gameLoadingProgress: () => Promise.resolve(),
+  gameLoadingFinished: () => Promise.resolve(),
+  gameplayStart: () => Promise.resolve(),
+  gameplayStop: () => Promise.resolve(),
+  commercialBreak: () => Promise.resolve(),
+  rewardedBreak: () => Promise.resolve(true),
+  togglePlayerAdvertisingConsent: () => Promise.resolve(),
+  setPlayerAge: () => Promise.resolve(),
+  displayAd: () => Promise.resolve(),
+  destroyAd: () => Promise.resolve(),
+  isAdBlocked: () => false,
+  getLeaderboard: () => Promise.resolve([]),
+  shareable: () => Promise.resolve(false),
+  setDebug: () => {},
+  customEvent: () => {},
+  roundStart: () => Promise.resolve(),
+  roundEnd: () => Promise.resolve(),
+  levelStart: () => Promise.resolve(),
+  levelEnd: () => Promise.resolve(),
+  happyTime: () => Promise.resolve()
+};
+
+function openModal(type) {
+  const title = document.getElementById("modalTitle");
+  const desc = document.getElementById("modalDescription");
+  const message = document.getElementById("modalMessage");
+  const action = document.getElementById("modalAction");
+
+  message.textContent = "";
+
+  if (type === "duel") {
+    title.textContent = "⚔️ Ranked Duel";
+    desc.textContent = "Challenge another SubwayRanked player.";
+    message.textContent = "Online matchmaking is not connected yet.";
+    action.textContent = "Search for Game";
+    action.onclick = () => {
+      message.textContent =
+        "A multiplayer matchmaking server must be configured first.";
+    };
+  } else if (type === "rank") {
+    title.textContent = "🏆 Your Rank";
+    desc.textContent = "Your profile and rating will appear here.";
+    message.textContent = "UNRANKED · Placement matches not completed";
+    action.textContent = "OK";
+    action.onclick = closeModal;
+  } else {
+    title.textContent = "⚙️ Settings";
+    desc.textContent = "SubwayRanked interface settings.";
+    message.textContent = "More settings can be added here.";
+    action.textContent = "OK";
+    action.onclick = closeModal;
+  }
+
+  document.getElementById("modalBackdrop").classList.add("show");
+}
+
+function closeModal() {
+  document.getElementById("modalBackdrop").classList.remove("show");
+}
+
+document.getElementById("modalBackdrop").addEventListener("click", event => {
+  if (event.target.id === "modalBackdrop") closeModal();
+});
+</script>
 
 <script src="unity.js"></script>
-
 </body>
 </html>
