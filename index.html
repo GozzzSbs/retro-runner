@@ -513,6 +513,75 @@
     min-height: 420px;
   }
 }
+   /* SubwayRanked — cartes de classement */
+.rank-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.rank-grid article {
+  padding: 20px;
+  color: var(--ink);
+  background: var(--panel, #172a3c);
+  border: 1px solid var(--line, #30485e);
+  border-radius: 14px;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.rank-grid article:hover {
+  transform: translateY(-3px);
+  border-color: #39d9ff;
+}
+
+.rank-grid article h3 {
+  margin: 0 0 8px;
+  font-size: 1.2rem;
+}
+
+.rank-grid article p {
+  margin: 6px 0;
+  color: var(--muted);
+}
+
+.rank-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 12px;
+  margin-bottom: 12px;
+  color: #07111d;
+  background: #39d9ff;
+  border-radius: 999px;
+  font-weight: 800;
+}
+
+.rank-progress {
+  height: 8px;
+  margin-top: 14px;
+  overflow: hidden;
+  background: #30485e;
+  border-radius: 999px;
+}
+
+.rank-progress span {
+  display: block;
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg, #39d9ff, #8b7bff);
+  border-radius: inherit;
+}
+
+html[data-theme="dark"] .rank-grid article {
+  color: #dceaf6;
+  background: #172a3c;
+  border-color: #30485e;
+}
+
+@media (max-width: 720px) {
+  .rank-grid {
+    grid-template-columns: 1fr;
+  }
+} 
   </style>
 </head>
 
