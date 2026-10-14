@@ -108,6 +108,28 @@ main {
   position: relative;
   min-height: 430px;
   overflow: hidden;
+  isolation: isolate;
+  border: 2px solid #8aeaff;
+  border-radius: 15px;
+  background: #10213b;
+  box-shadow: 0 18px 55px #07152d66;
+}
+
+#game-container {
+  z-index: 2 !important;
+  pointer-events: auto !important;
+}
+
+#game,
+#game canvas,
+#game-container canvas {
+  pointer-events: auto !important;
+  touch-action: manipulation;
+}
+
+.game-caption {
+  pointer-events: none !important;
+}
   border: 2px solid #8aeaff;
   border-radius: 15px;
   background: #10213b;
